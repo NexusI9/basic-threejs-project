@@ -1,0 +1,67 @@
+<!doctype html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Maître Piscinier - Configurateur</title>
+    <meta name="description" content="A simple HTML5 Template for new projects.">
+    <meta name="NEK" content="SitePoint">
+
+    <link rel="stylesheet" href="sheets/sheet.css">
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js' type='text/javascript'></script>
+    <script src='js/three.min.js' type='text/javascript'></script>
+    <script src='js/OrbitControls.js' type='text/javascript'></script>
+    <script src='js/GLTFLoader.js' type='text/javascript'></script>
+    <script src='js/RGBELoader.js' type='text/javascript'></script>
+    <script src='js/index_horsterre.js' type='module'></script>
+
+  </head>
+
+  <body>
+
+    <div id="configContainer">
+        <div id="builder" class="grid">
+          <div id="poolContainer"></div>
+        </div>
+        <div id="choice">
+          <section data-choice="shape">
+            <h2>Forme</h2>
+
+              <form>
+
+                <label>
+                  <input type="radio" name="shape" value="circle" checked>Ronde
+                </label>
+  
+                <label>
+                  <input type="radio" name="shape" value="ovale">Ovale
+                </label>
+
+             
+                <label for="radio_idk">
+                  <input type="radio" name="shape" value="circle"  id="radio_idk">
+                  Je ne sais pas/ Conseillez-moi
+                </label>
+            </form>
+
+          </section>
+            <section data-choice="wall">
+              <h2>Mur</h2>
+              <div></div>
+            </section>
+            <section data-choice="liner">
+              <h2>Toile</h2>
+              <div></div>
+            </section>
+            <section data-choice="support">
+              <h2>Support</h2>
+              <div></div>
+            </section>
+        </div>
+    </div>
+
+  </body>
+</html>

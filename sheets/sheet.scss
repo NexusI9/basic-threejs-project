@@ -1,0 +1,183 @@
+$white: #FFFFFF;
+$blue:#302F63;
+$red: #EA504C;
+$cyan:#68C3CD;
+$yellow: #FFC952;
+
+
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;1000&display=swap'); 
+
+body{
+  margin: 0;
+  font-family: 'Mulish', sans-serif;
+  overflow: hidden;
+  background-color: $cyan;
+}
+
+
+#choiceContainer{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap:10%;
+  a{
+    transition: transform 0.3s ease-out;
+    transform: scale3d(1,1,1);
+    &:hover{ transform: scale3d(1.1,1.1,1.1); }
+    span{
+      position: relative;
+      z-index: 1;
+    }
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+
+    &::before{
+      z-index: 0;
+      content: '';
+      position: absolute;
+      $size:200px;
+      width: $size;
+      height: $size;
+      background-image: url('../assets/button.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+
+    }
+  }
+}
+
+a{
+  font-family: 'Mulish', sans-serif;
+  text-decoration: none;
+  color: $white;
+}
+
+
+#configContainer{ 
+
+  display: grid;
+  grid-template-columns: 1.5fr 2fr;
+  width: 100vw;
+  height: 100vh;
+
+  #builder{
+
+    &.grid{
+      background-image: url("../assets/grid.jpg");
+      background-size: 10%;
+      animation-name: gridAnim;
+      animation-duration: 5s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    img[alt='garden']{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 55%;
+      object-fit: cover;
+    }
+    background-color: $cyan;
+    position: relative;
+    display: flex;
+    justify-content: center;
+
+    #popupTips{
+      position: absolute;
+      bottom: 5%;
+      background-color: $white;
+      color: $blue;
+      box-sizing: border-box;
+      padding: 5px 20px;
+      max-width: 80%;
+      opacity: 0;
+      transform: translateY(80px);
+      transition: opacity 0.2s, transform 0.2s ease-out;
+
+      &.appear{
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      h3{ text-transform: capitalize; }
+      img{
+        float: right;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+    }
+
+    #poolContainer{
+      width: 100%;
+      height: 100%;
+      display: block;
+      position: relative;
+    }
+
+    @keyframes gridAnim {
+      to{ background-position: -11% 8%;}
+    }
+  }
+
+  #choice{
+    box-sizing: border-box;
+    padding: 10%;
+    color: $white;
+    background-color: $cyan;
+    max-height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    row-gap: 30px;
+    overflow-y: scroll;
+
+    section{
+      background-color: #76b2c0;
+      box-sizing: border-box;
+      padding: 5% 10%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      
+
+      & > div{ //texture container
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 5px;
+        row-gap: 5px;
+      }
+
+      .textureButton{
+        background: $blue;
+        border: none;
+        box-sizing: border-box;
+        border-radius: 2em;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        width: 80px;
+        height: 80px;
+        img{
+          max-width: 100%;
+          border-radius: 1.4em;
+        }
+      }
+    }
+
+    form{
+     display: flex;
+     flex-direction: column; 
+     row-gap: 10px;
+    }
+  }
+}

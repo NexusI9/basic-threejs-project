@@ -1,0 +1,172 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;1000&display=swap");
+body {
+  margin: 0;
+  font-family: "Mulish", sans-serif;
+  overflow: hidden;
+  background-color: #68C3CD;
+}
+
+#choiceContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10%;
+}
+#choiceContainer a {
+  transition: transform 0.3s ease-out;
+  transform: scale3d(1, 1, 1);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  font-weight: bold;
+}
+#choiceContainer a:hover {
+  transform: scale3d(1.1, 1.1, 1.1);
+}
+#choiceContainer a span {
+  position: relative;
+  z-index: 1;
+}
+#choiceContainer a::before {
+  z-index: 0;
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background-image: url("../assets/button.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+a {
+  font-family: "Mulish", sans-serif;
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+#configContainer {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr;
+  width: 100vw;
+  height: 100vh;
+}
+#configContainer #builder {
+  background-color: #68C3CD;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+#configContainer #builder.grid {
+  background-image: url("../assets/grid.jpg");
+  background-size: 10%;
+  -webkit-animation-name: gridAnim;
+          animation-name: gridAnim;
+  -webkit-animation-duration: 5s;
+          animation-duration: 5s;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+#configContainer #builder img[alt=garden] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 55%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+#configContainer #builder #popupTips {
+  position: absolute;
+  bottom: 5%;
+  background-color: #FFFFFF;
+  color: #302F63;
+  box-sizing: border-box;
+  padding: 5px 20px;
+  max-width: 80%;
+  opacity: 0;
+  transform: translateY(80px);
+  transition: opacity 0.2s, transform 0.2s ease-out;
+}
+#configContainer #builder #popupTips.appear {
+  opacity: 1;
+  transform: translateY(0);
+}
+#configContainer #builder #popupTips h3 {
+  text-transform: capitalize;
+}
+#configContainer #builder #popupTips img {
+  float: right;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+#configContainer #builder #poolContainer {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: relative;
+}
+@-webkit-keyframes gridAnim {
+  to {
+    background-position: -11% 8%;
+  }
+}
+@keyframes gridAnim {
+  to {
+    background-position: -11% 8%;
+  }
+}
+#configContainer #choice {
+  box-sizing: border-box;
+  padding: 10%;
+  color: #FFFFFF;
+  background-color: #68C3CD;
+  max-height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  row-gap: 30px;
+  overflow-y: scroll;
+}
+#configContainer #choice section {
+  background-color: #76b2c0;
+  box-sizing: border-box;
+  padding: 5% 10%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+#configContainer #choice section > div {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  -moz-column-gap: 5px;
+       column-gap: 5px;
+  row-gap: 5px;
+}
+#configContainer #choice section .textureButton {
+  background: #302F63;
+  border: none;
+  box-sizing: border-box;
+  border-radius: 2em;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 80px;
+  height: 80px;
+}
+#configContainer #choice section .textureButton img {
+  max-width: 100%;
+  border-radius: 1.4em;
+}
+#configContainer #choice form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}/*# sourceMappingURL=sheet.css.map */

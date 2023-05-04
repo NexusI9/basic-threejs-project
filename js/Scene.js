@@ -33,10 +33,13 @@ export default class Scene{
     this.play = true;
   }
 
-  spawn(){
+  init(){
 
       //check si le canvas est present dans le DOM
-      this.container = document.querySelectorAll(this.container)[0];
+      this.container = document.querySelector(this.container);
+      this.containerWidth = () => this.container.getBoundingClientRect().width;
+      this.containerHeight = () => this.container.getBoundingClientRect().height;
+
       if(!this.container){
         console.warn("Canvas element not found in DOM, check CanvasId parameter");
         return null;
@@ -49,18 +52,18 @@ export default class Scene{
 
   onResize(){
 
-    this.camera.aspect = window.innerWidth / window.innerHeight;
+    this.camera.aspect = this.containerWidth() / this.containerHeight();
     this.camera.updateProjectionMatrix();
-    this.renderer.setSize(window.innerWidth,window.innerHeight);
+    this.renderer.setSize( this.containerWidth(), this.containerHeight());
   }
 
   _init_(){
 
     //-------Setup le Renderer-------
-    this.renderer = new THREE.WebGLRenderer({ alpha: true });
+    this.renderer = new THREE.WebGLRenderer({ alpha: true, antialiasing: true });
     this.renderer.setPixelRatio( window.devicePixelRatio );
     this.renderer.setClearColor( 0x000000, 0 );
-    this.renderer.setSize(window.innerWidth,window.innerHeight);
+    this.renderer.setSize( this.containerWidth(), this.containerHeight() );
     this.container.appendChild(this.renderer.domElement);    //append le render dans le canvas
 
     //-------Setup de la scene-------
@@ -68,10 +71,10 @@ export default class Scene{
     this.scene.background = null;
 
     //-------Setup de la camera-------
-    this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000 );
+    this.camera = new THREE.PerspectiveCamera(45, this.containerWidth() / this.containerHeight(), 0.1, 1000 );
     this.camera.focalLength = 205;
     this.camera.position.z = 3.8;
-    this.camera.position.y = 0.3;
+    this.camera.position.y = 0.7;
     this.camera.position.x = this.cameraPosX;
     this.camera.rotation.x = -Math.PI/50;
     this.scene.add(this.camera); //ajout de la camera
@@ -81,8 +84,12 @@ export default class Scene{
       this.orbitControls.enableDamping=true;
       this.orbitControls.enableZoom=false;
       this.orbitControls.update();
+      this.orbitControls.maxPolarAngle = Math.PI/2;
     }
 
+    //add light
+    const light = new THREE.AmbientLight( 0xffffff, 1 );// soft white light
+    this.scene.add( light ); 
 
 
     //viewscope setup to render or not depending if the scene is in the viewport
@@ -100,13 +107,34 @@ export default class Scene{
 
   }
 
-  setHDR(path){
+  updateMaterials(){
+    this.objects?.forEach( obj => {
+      obj.traverse( item => {
+        if(item.material){ 
+          if(this.hdrEquirect && this.hdrIntensity){ //re apply the hdr lightning
+            item.material.envMap = this.hdrEquirect;
+            item.material.envMapIntensity = this.hdrIntensity;
+          }
+          item.material.needsUpdate = true; 
+        }
+      });
+    });
+  }
 
-    const hdrEquirect = new THREE.RGBELoader().load(path, () => {  hdrEquirect.mapping = THREE.EquirectangularReflectionMapping; });
+  setHDR({path, intensity=0.5}){
+
+    this.hdrEquirect = new THREE.RGBELoader().load(path, () => {  this.hdrEquirect.mapping = THREE.EquirectangularReflectionMapping; });
+    this.hdrIntensity = intensity;
 
     this.objects?.forEach( obj => {
-      obj.traverse( item => item.material ? item.material.envMap = hdrEquirect : 0);
       this.scene.add(obj);
+      obj.traverse( item => {
+        if(item.material ){
+          item.material.envMap = this.hdrEquirect;
+          item.material.envMapIntensity = this.hdrIntensity;
+          item.material.needsUpdate = true;
+        }
+      });
     });
 
   }
