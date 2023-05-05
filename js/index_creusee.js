@@ -37,7 +37,7 @@ function _main_(){
 
     //generate Liner Textures
     generateTexturesButton({ 
-        textures: TEXTURES.liner, 
+        textures: TEXTURES.liner.filter(n => n.model === 'creusée'), 
         path:'./assets/textures/liner/',
         parent:'#choice > section[data-choice="liner"] > div',
         onButtonClick: (e) => {

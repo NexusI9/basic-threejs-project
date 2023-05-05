@@ -63,7 +63,7 @@ function _main_(){
 
     //generate Liner Textures
     generateTexturesButton({ 
-        textures: TEXTURES.liner, 
+        textures: TEXTURES.liner.filter(n => n.model === 'hors-terre'), 
         path:'./assets/textures/liner/',
         parent:'#choice > section[data-choice="liner"] > div',
         onButtonClick: (e) => pool?.setLinerTextureTo({texture: e.texture.path}) 
@@ -74,7 +74,7 @@ function _main_(){
         textures: TEXTURES.support, 
         path:'./assets/textures/border/',
         parent:'#choice > section[data-choice="support"] > div',
-        onButtonClick: (e) => pool?.setSupportTextureTo({texture: e.texture.name, metalness: e.texture.metalness})
+        onButtonClick: (e) => pool?.setSupportTextureTo({texture: e.texture.name, metalness: e.texture.metalness, customUV:e.texture.customUV})
     });
 
 

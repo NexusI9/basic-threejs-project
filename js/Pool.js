@@ -90,7 +90,7 @@ export default class Pool{
     }
 
 
-    setSupportTextureTo({texture, metalness}){
+    setSupportTextureTo({texture, metalness, customUV}){
         
         this.mesh.traverse( item => {
            if(item.material && item.material.name === 'border' ){

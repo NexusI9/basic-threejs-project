@@ -35,12 +35,12 @@ const TEXTURES = {
         {name: "unity", model:'hors-terre'},
     ],
     support: [
-        {name: 'alize'},
+        {name: 'alize',metalness: 0.3},
         {name: 'aquatica'},
-        {name: 'calypso'},
-        {name: 'canyon'},
-        {name: 'costa', metalness: 0.4},
-        {name: 'quantum'},
+        {name: 'calypso', metalness: 0.2},
+        {name: 'canyon', customUV: 'UVMap.001'},
+        {name: 'costa', metalness: 0.2},
+        {name: 'quantum', metalness: 0.3},
     ]
 }
 
